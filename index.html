@@ -1,0 +1,2176 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TECHFORGE | 인텔리엠비언트 (Intelli-Ambient)</title>
+  <!-- Fonts: Noto Sans KR & Inter (Authentic Korean Corporate Standard Gothic) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-black: #0a0a0a;
+      --bg-surface: #121212;
+      --bg-panel: #161616;
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1aa;
+      --text-tertiary: #71717a;
+      --border-line: #242424;
+      --border-strong: #3f3f46;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--bg-black);
+      color: var(--text-primary);
+      font-family: 'Noto Sans KR', 'Inter', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      word-break: keep-all;
+    }
+
+    /* ==================== HEADER / NAVIGATION ==================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff;
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      transition: color 0.2s ease;
+      padding: 6px 0;
+      position: relative;
+    }
+
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0%;
+      height: 1.5px;
+      background: #ffffff;
+      transition: width 0.25s ease;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a.active {
+      color: #ffffff;
+    }
+
+    .nav-links li a:hover::after,
+    .nav-links li a.active::after {
+      width: 100%;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-contact {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 0.84rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      padding: 9px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: transparent;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-contact:hover {
+      background: #ffffff;
+      color: #0a0a0a;
+      border-color: #ffffff;
+    }
+
+    /* ==================== HERO SECTION ==================== */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background-color: var(--bg-black);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(circle at 72% 45%, #16181d 0%, #0a0a0a 70%);
+      background-size: cover;
+      background-position: 70% center;
+      background-repeat: no-repeat;
+      filter: brightness(0.78) contrast(1.06) saturate(0.85);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(90deg,
+          rgba(10, 10, 10, 0.92) 0%,
+          rgba(10, 10, 10, 0.76) 34%,
+          rgba(10, 10, 10, 0.28) 60%,
+          rgba(10, 10, 10, 0.14) 82%,
+          rgba(10, 10, 10, 0.45) 100%),
+        linear-gradient(180deg,
+          rgba(10, 10, 10, 0.75) 0%,
+          rgba(10, 10, 10, 0.05) 25%,
+          rgba(10, 10, 10, 0.1) 75%,
+          rgba(10, 10, 10, 0.98) 100%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      padding: 0 7% 0 11%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 48px;
+      margin-top: -16px;
+    }
+
+    .hero-content {
+      max-width: 580px;
+      flex: 1;
+    }
+
+    .hero-visual-box {
+      position: relative;
+      width: min(470px, 39vw);
+      flex-shrink: 0;
+      background: transparent;
+      border: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .hero-visual-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border: none;
+      border-radius: 12px;
+      /* Softly blend the outer edges into the dark hero background without any hard border */
+      -webkit-mask-image: radial-gradient(ellipse 92% 90% at 50% 50%, #000 68%, rgba(0, 0, 0, 0.5) 86%, transparent 100%);
+      mask-image: radial-gradient(ellipse 92% 90% at 50% 50%, #000 68%, rgba(0, 0, 0, 0.5) 86%, transparent 100%);
+    }
+
+    .hero-visual-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      font-size: clamp(2.4rem, 3.8vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.22;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      margin-bottom: 22px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: clamp(0.96rem, 1.05vw, 1.05rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.75;
+      letter-spacing: -0.03em;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-more {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 13px 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      background: rgba(10, 10, 10, 0.35);
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-more:hover {
+      border-color: #ffffff;
+      background: #ffffff;
+      color: #0a0a0a;
+    }
+
+    .btn-more svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-more:hover svg {
+      transform: translateX(4px);
+    }
+
+    .hero-hud {
+      position: absolute;
+      bottom: 34px;
+      left: 11%;
+      right: 7%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      padding-top: 18px;
+    }
+
+    .hud-specs {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+    }
+
+    .hud-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hud-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .hud-value {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: -0.03em;
+    }
+
+    .scroll-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .scroll-line {
+      width: 32px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ==================== COMMON SECTION STYLES ==================== */
+    .corp-section {
+      position: relative;
+      width: 100%;
+      padding: 120px 7%;
+      background-color: var(--bg-black);
+      border-top: 1px solid var(--border-line);
+      scroll-margin-top: 80px;
+    }
+
+    .corp-section.alt-bg {
+      background-color: #0d0d0d;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border-line);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+    }
+
+    .section-sub {
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+    }
+
+    /* ==================== 1. 회사소개 (ABOUT US) ==================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 48px;
+      align-items: stretch;
+    }
+
+    .about-lead {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .about-headline {
+      font-size: 1.65rem;
+      font-weight: 700;
+      line-height: 1.45;
+      letter-spacing: -0.035em;
+      color: #ffffff;
+      margin-bottom: 22px;
+    }
+
+    .about-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      letter-spacing: -0.025em;
+      margin-bottom: 32px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border-line);
+      padding-top: 24px;
+      gap: 20px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      letter-spacing: -0.02em;
+    }
+
+    .about-info-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-info-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-strong);
+      letter-spacing: -0.02em;
+    }
+
+    .corp-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .corp-table tr {
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    .corp-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .corp-table th {
+      text-align: left;
+      padding: 13px 12px 13px 0;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      width: 32%;
+    }
+
+    .corp-table td {
+      padding: 13px 0;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    /* ==================== 2. 핵심기술 (CORE TECH) ==================== */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .tech-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s ease;
+    }
+
+    .tech-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .tech-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .tech-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    .tech-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .tech-meta {
+      padding-top: 16px;
+      border-top: 1px solid var(--border-line);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ==================== 3. 제품라인업: 인텔리엠비언트 ==================== */
+    .flagship-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+    }
+
+    .flagship-visual {
+      position: relative;
+      min-height: 460px;
+      background-color: #161616;
+      border-right: 1px solid var(--border-line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 40px;
+    }
+
+    .flagship-visual img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .visual-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--text-tertiary);
+      text-align: center;
+    }
+
+    .visual-placeholder-box {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+      color: var(--text-secondary);
+    }
+
+    .visual-placeholder-text {
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: -0.02em;
+    }
+
+    .visual-placeholder-sub {
+      font-size: 0.76rem;
+      color: var(--text-tertiary);
+    }
+
+    .flagship-details {
+      padding: 48px 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flagship-model {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .flagship-name {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+
+    .flagship-summary {
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      letter-spacing: -0.025em;
+      margin-bottom: 32px;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 36px;
+      border-top: 1px solid var(--border-strong);
+    }
+
+    .spec-table tr {
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    .spec-table th {
+      text-align: left;
+      padding: 13px 16px 13px 0;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      width: 34%;
+      letter-spacing: -0.02em;
+    }
+
+    .spec-table td {
+      padding: 13px 0;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .flagship-actions {
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .price-block {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .price-label {
+      font-size: 0.74rem;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+
+    .price-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+    }
+
+    .btn-primary {
+      padding: 13px 28px;
+      background: #ffffff;
+      color: #0a0a0a;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      border: 1px solid #ffffff;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: #ffffff;
+    }
+
+    /* ==================== 4. 시공갤러리 (GALLERY) ==================== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .gallery-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s ease;
+    }
+
+    .gallery-item:hover {
+      border-color: var(--border-strong);
+    }
+
+    .gallery-thumb {
+      width: 100%;
+      height: 220px;
+      background: #161616;
+      border-bottom: 1px solid var(--border-line);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-info {
+      padding: 22px 24px;
+    }
+
+    .gallery-meta {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .gallery-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .gallery-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      letter-spacing: -0.02em;
+    }
+
+    /* ==================== 4-2. 협력사 (PARTNERS) ==================== */
+    .partners-intro {
+      max-width: 720px;
+      margin-bottom: 40px;
+    }
+
+    .partners-headline {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+
+    .partners-lead-text {
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      letter-spacing: -0.025em;
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .partner-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      padding: 40px 44px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 44px;
+      align-items: center;
+      transition: border-color 0.2s ease;
+    }
+
+    .partner-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .partner-logo-showcase {
+      width: 100%;
+      height: 150px;
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 32px;
+    }
+
+    .partner-logo-showcase img {
+      max-width: 100%;
+      max-height: 90px;
+      object-fit: contain;
+    }
+
+    .partner-info-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .partner-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-line);
+      flex-wrap: wrap;
+    }
+
+    .partner-title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .partner-role {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .partner-name {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+    }
+
+    .partner-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      letter-spacing: -0.02em;
+      margin-bottom: 22px;
+      flex: 1;
+    }
+
+    .partner-meta {
+      padding-top: 14px;
+      border-top: 1px solid var(--border-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    .partner-meta strong {
+      color: #e4e4e7;
+      font-weight: 500;
+    }
+
+    /* ==================== 5. 고객지원 (SUPPORT & CONTACT) ==================== */
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 40px;
+    }
+
+    .support-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      padding: 38px 36px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .support-panel-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .support-panel-sub {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      margin-bottom: 26px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .faq-item {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .faq-q {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .faq-a {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      letter-spacing: -0.02em;
+    }
+
+    /* Contact Form */
+    .inquiry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 11px 14px;
+      background: #0e0e0e;
+      border: 1px solid var(--border-line);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-control:focus {
+      border-color: #ffffff;
+    }
+
+    textarea.form-control {
+      min-height: 108px;
+      resize: vertical;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 40px 7%;
+      background: #070707;
+      border-top: 1px solid var(--border-line);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
+    }
+
+    @media (max-width: 960px) {
+      .navbar {
+        padding: 0 5%;
+      }
+
+      .nav-links {
+        gap: 22px;
+      }
+
+      .hero-inner {
+        padding: 0 7%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 28px;
+        margin-top: 20px;
+      }
+
+      .hero-visual-box {
+        width: 100%;
+        max-width: 480px;
+      }
+
+      .hero-hud {
+        left: 7%;
+        right: 7%;
+      }
+
+      .hud-specs {
+        gap: 24px;
+      }
+
+      .about-grid,
+      .tech-grid,
+      .flagship-card,
+      .gallery-grid,
+      .partners-grid,
+      .partner-card,
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flagship-visual {
+        min-height: 300px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-line);
+      }
+
+      .flagship-details {
+        padding: 32px 24px;
+      }
+
+      .partner-card {
+        padding: 28px 24px;
+        gap: 24px;
+      }
+
+      .partner-logo-showcase {
+        height: 120px;
+      }
+    }
+
+    /* Mobile Hamburger Button (Hidden on Desktop) */
+    .mobile-menu-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 1px solid var(--border-line);
+      color: #ffffff;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Mobile Drawer Menu */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: 100%;
+      background: rgba(10, 10, 10, 0.98);
+      border-bottom: 1px solid var(--border-line);
+      z-index: 99;
+      padding: 16px 6% 24px;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-drawer.open {
+      display: flex;
+    }
+
+    .mobile-drawer a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 0.98rem;
+      font-weight: 500;
+      padding: 13px 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-drawer a:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        height: 64px;
+        padding: 0 5%;
+      }
+
+      .logo {
+        font-size: 1.1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-contact {
+        padding: 7px 13px;
+        font-size: 0.78rem;
+      }
+
+      .nav-right {
+        gap: 8px;
+      }
+
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+
+      .hero {
+        height: auto;
+        min-height: 100svh;
+        padding: 96px 0 100px;
+      }
+
+      .hero-bg {
+        background-position: 74% center;
+      }
+
+      .hero-inner {
+        padding: 0 6%;
+        margin-top: 0;
+        gap: 24px;
+      }
+
+      .hero-visual-box {
+        width: 100%;
+        max-width: 100%;
+        padding: 8px;
+      }
+
+      .hero-title {
+        font-size: 2.05rem;
+        line-height: 1.24;
+        margin-bottom: 16px;
+      }
+
+      .hero-subtitle {
+        font-size: 0.9rem;
+        line-height: 1.65;
+        margin-bottom: 30px;
+      }
+
+      .btn-more {
+        padding: 12px 28px;
+        font-size: 0.84rem;
+      }
+
+      .hero-hud {
+        left: 6%;
+        right: 6%;
+        bottom: 22px;
+        padding-top: 14px;
+      }
+
+      .hud-specs {
+        gap: 18px;
+      }
+
+      .hud-item:nth-child(3) {
+        display: none;
+      }
+
+      .hud-label {
+        font-size: 0.62rem;
+      }
+
+      .hud-value {
+        font-size: 0.8rem;
+      }
+
+      .corp-section {
+        padding: 72px 5%;
+        scroll-margin-top: 64px;
+      }
+
+      .section-header {
+        margin-bottom: 28px;
+        padding-bottom: 16px;
+      }
+
+      .section-title {
+        font-size: 1.45rem;
+      }
+
+      .about-headline {
+        font-size: 1.32rem;
+      }
+
+      .about-info-box,
+      .tech-card,
+      .support-panel {
+        padding: 24px 20px;
+      }
+
+      .flagship-visual {
+        min-height: 240px;
+        padding: 24px;
+      }
+
+      .flagship-name {
+        font-size: 1.55rem;
+      }
+
+      .partner-name {
+        font-size: 1.25rem;
+      }
+
+      .partner-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .form-control {
+        font-size: 16px; /* Prevents iOS Safari zoom on input focus */
+      }
+
+      .site-footer {
+        padding: 28px 5%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== TOP NAVIGATION ==================== -->
+  <header class="navbar">
+    <a href="#top" class="logo">TECHFORGE</a>
+
+    <ul class="nav-links">
+      <li><a href="#about">회사소개</a></li>
+      <li><a href="#tech">핵심기술</a></li>
+      <li><a href="#lineup">제품라인업</a></li>
+      <li><a href="#gallery">시공갤러리</a></li>
+      <li><a href="#partners">협력사</a></li>
+      <li><a href="#devenv">개발환경</a></li>
+      <li><a href="#support">고객지원</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <a href="#support" class="nav-contact">문의하기</a>
+      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="메뉴 열기">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Dropdown Menu Drawer -->
+  <nav class="mobile-drawer" id="mobile-drawer">
+    <a href="#about"><span>회사소개</span><span>→</span></a>
+    <a href="#tech"><span>핵심기술</span><span>→</span></a>
+    <a href="#lineup"><span>제품라인업</span><span>→</span></a>
+    <a href="#gallery"><span>시공갤러리</span><span>→</span></a>
+    <a href="#partners"><span>협력사</span><span>→</span></a>
+    <a href="#devenv"><span>개발환경</span><span>→</span></a>
+    <a href="#support"><span>고객지원</span><span>→</span></a>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero" id="top">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Beyond light,<br />
+          We Orchestrate<br />
+          Every Drive!
+        </h1>
+
+        <p class="hero-subtitle">
+          테크포지는 단순한 차량 실내 조명을 넘어, 드라이빙의 감성과 공간의 가치를 연결합니다.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#lineup" class="btn-more">
+            <span>More</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Side Dual Interactive GIF Showcase (Borderless & Blended) -->
+      <div class="hero-visual-box">
+        <div class="hero-visual-frame">
+          <img src="./hero_ambient_1.gif" alt="인텔리엠비언트 순정 모니터 연동 구동 화면 2" />
+        </div>
+        <div class="hero-visual-frame">
+          <img src="./hero_ambient_2.gif" alt="인텔리엠비언트 순정 모니터 연동 구동 화면 1" />
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-hud">
+      <div class="hud-specs">
+        <div class="hud-item">
+          <span class="hud-label">Product</span>
+          <span class="hud-value">인텔리엠비언트</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">System</span>
+          <span class="hud-value">차량 실내 스마트 엠비언트</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Company</span>
+          <span class="hud-value">TECHFORGE</span>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ==================== 1. 회사소개 (ABOUT US) ==================== -->
+  <section class="corp-section" id="about">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">회사소개</h2>
+        <p class="section-sub">About TECHFORGE</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-lead">
+          <div>
+            <h3 class="about-headline">
+              차량 실내 공간의 기준을 설계하는<br />
+              모빌리티 라이팅 전문 기업, 테크포지
+            </h3>
+            <p class="about-text">
+              테크포지(TECHFORGE)는 자동차 실내 엠비언트 라이팅 시스템을 연구·개발하는 전문 브랜드입니다.
+              단순히 빛을 밝히는 용품을 넘어, 차량 본연의 인테리어 설계와 조화를 이루는 정밀 광학 구조와 스마트 제어 기술을 통해 운전자에게 가장 완성도 높은 실내 공간 경험을 제공합니다.
+            </p>
+          </div>
+
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">자체 광학·제어 설계</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">1:1</span>
+              <span class="stat-label">순정형 매립 일체감</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">A/S</span>
+              <span class="stat-label">책임 품질 보증 시스템</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-info-box">
+          <div class="about-info-title">기업 개요 (Company Overview)</div>
+          <table class="corp-table">
+            <tr>
+              <th>기업명</th>
+              <td>TECHFORGE (테크포지)</td>
+            </tr>
+            <tr>
+              <th>사업 분야</th>
+              <td>자동차 실내 엠비언트 라이팅 시스템 개발 및 판매</td>
+            </tr>
+            <tr>
+              <th>주력 제품</th>
+              <td>인텔리엠비언트 (Intelli-Ambient)</td>
+            </tr>
+            <tr>
+              <th>핵심 역량</th>
+              <td>초슬림 도광 설계, 스마트 컨트롤 모듈, 순정형 인테리어 연동</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 2. 핵심기술 (CORE TECH) ==================== -->
+  <section class="corp-section alt-bg" id="tech">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">핵심기술</h2>
+        <p class="section-sub">Core Technology</p>
+      </div>
+
+      <div class="tech-grid">
+        <article class="tech-card">
+          <span class="tech-num">TECHNOLOGY 01</span>
+          <h3 class="tech-name">지능형 스마트 제어 아키텍처</h3>
+          <p class="tech-desc">
+            주행 환경과 사용자 설정에 맞춰 색상, 밝기, 패턴을 정밀하게 제어하는 인텔리전트 컨트롤 기술을 적용하여 직관적이고 안정적인 조작성을 제공합니다.
+          </p>
+          <div class="tech-meta">
+            <span>Control System</span>
+            <span>Intelligent MCU</span>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <span class="tech-num">TECHNOLOGY 02</span>
+          <h3 class="tech-name">도트리스 균일 면발광 광학 설계</h3>
+          <p class="tech-desc">
+            LED 광점(도트)이 직접 노출되지 않는 고밀도 광확산 설계를 통해 야간 주행 시 눈부심을 방지하고, 처음부터 끝까지 끊김 없이 균일한 라인 조명을 구현합니다.
+          </p>
+          <div class="tech-meta">
+            <span>Optical Guide</span>
+            <span>Uniform Diffusion</span>
+          </div>
+        </article>
+
+        <article class="tech-card">
+          <span class="tech-num">TECHNOLOGY 03</span>
+          <h3 class="tech-name">초슬림 비노출 순정형 핏 & 내구성</h3>
+          <p class="tech-desc">
+            조명이 꺼져 있을 때도 차량 실내 트림에 자연스럽게 매립되어 이질감이 없으며, 차량용 내열·저소음·과전류 보호 설계를 통해 장시간 사용에도 높은 안정성을 유지합니다.
+          </p>
+          <div class="tech-meta">
+            <span>Reliability</span>
+            <span>Automotive Grade</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3. 제품라인업: 인텔리엠비언트 ==================== -->
+  <section class="corp-section" id="lineup">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">제품라인업</h2>
+        <p class="section-sub">TECHFORGE Official Product Lineup</p>
+      </div>
+
+      <div class="flagship-card" id="flagship-product">
+        <div class="flagship-visual">
+          <div class="visual-placeholder">
+            <div class="visual-placeholder-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+            <span class="visual-placeholder-text">인텔리엠비언트 제품 이미지</span>
+            <span class="visual-placeholder-sub">이미지를 전달해 주시면 이 영역에 배치됩니다.</span>
+          </div>
+        </div>
+        <div class="flagship-details">
+          <span class="flagship-model">INTELLI-AMBIENT</span>
+          <h3 class="flagship-name">인텔리 엠비언트<br /><span style="display: inline-block; margin-top: 10px; font-size: 0.92rem; font-weight: 500; line-height: 1.65; color: #d4d4d8;">무배선<br />무빙<br />순정 시스템 연동 지원</span></h3>
+          <p class="flagship-summary">차량 실내 환경과 주행 감성에 맞춰 정교하게 빛을 연출하는 테크포지의 스마트 무빙 엠비언트 라이팅 시스템입니다.</p>
+          <table class="spec-table">
+            <tr><th>제품명</th><td>인텔리 엠비언트</td></tr>
+            <tr><th>브랜드</th><td>TECHFORGE</td></tr>
+            <tr><th>제어 방식</th><td>순정 네비게이션 제어 + 블루투스 제어</td></tr>
+            <tr><th>적용 차종</th><td>Gen5W 이상 (외제차는 추후 공지예정)</td></tr>
+            <tr><th>구성 품목</th><td>아크릴 6개, 메인모듈 + 서브모듈 4개 (배선포함)</td></tr>
+          </table>
+          <div class="flagship-actions">
+            <div class="price-block">
+              <span class="price-label">판매 가격</span>
+              <span class="price-value">추후 입력</span>
+            </div>
+            <a href="#support" class="btn-primary">제품 문의하기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. 시공갤러리 (GALLERY) ==================== -->
+  <section class="corp-section alt-bg" id="gallery">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">시공갤러리</h2>
+        <p class="section-sub">Installation & Reference Gallery</p>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <article class="gallery-item">
+          <div class="gallery-thumb">
+            <img src="./gallery_ref_01.gif" alt="인텔리엠비언트 전면 대시보드 & 도어 라인 시공" />
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-meta">REFERENCE 01</div>
+            <h3 class="gallery-title">인텔리엠비언트 전면 대시보드 & 도어 라인 시공</h3>
+            <p class="gallery-desc">끊김 없이 이어지는 수평 라인을 통해 야간 주행 시 넓고 안정감 있는 실내 공간감을 완성합니다.</p>
+          </div>
+        </article>
+        <article class="gallery-item">
+          <div class="gallery-thumb">
+            <div class="visual-placeholder">
+              <span class="visual-placeholder-text">시공 사진 영역</span>
+              <span class="visual-placeholder-sub">REFERENCE 02</span>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-meta">REFERENCE 02</div>
+            <h3 class="gallery-title">인텔리엠비언트 센터콘솔 & 풋등 연동 시공</h3>
+            <p class="gallery-desc">상단 메인 라인과 하단 간접 조명의 밝기 밸런스를 정밀하게 맞춘 실내 무드 연출 사례입니다.</p>
+          </div>
+        </article>
+        <article class="gallery-item">
+          <div class="gallery-thumb">
+            <div class="visual-placeholder">
+              <span class="visual-placeholder-text">시공 사진 영역</span>
+              <span class="visual-placeholder-sub">REFERENCE 03</span>
+            </div>
+          </div>
+          <div class="gallery-info">
+            <div class="gallery-meta">REFERENCE 03</div>
+            <h3 class="gallery-title">인텔리엠비언트 주간 소등 상태 (비노출 매립)</h3>
+            <p class="gallery-desc">조명 소등 시에도 트림 단차나 돌출 없이 순정 인테리어와 완벽한 일체감을 유지합니다.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. 협력사 (PARTNERS) ==================== -->
+  <section class="corp-section" id="partners">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">협력사 소개</h2>
+        <p class="section-sub">Strategic Partners & Network</p>
+      </div>
+
+      <div class="partners-intro">
+        <h3 class="partners-headline">
+          검증된 기술 파트너 및 글로벌 하드웨어 제조사와 함께<br />
+          최상의 품질과 제품 완성도를 보장합니다.
+        </h3>
+        <p class="partners-lead-text">
+          테크포지는 핵심 기술 파트너사 및 글로벌 PCB·부품 제조사와의 긴밀한 파트너십을 통해 인텔리엠비언트의 설계부터 양산까지 일관된 품질 기준을 유지합니다.
+        </p>
+      </div>
+
+      <div class="partners-grid" id="partners-grid">
+        <article class="partner-card">
+          <div class="partner-logo-showcase" style="background-color: #ffffff;">
+            <img src="./partner_nucode.png" alt="NUCODE (누코드)" />
+          </div>
+          <div class="partner-info-body">
+            <div class="partner-top">
+              <div class="partner-title-box">
+                <span class="partner-role">OFFICIAL TECHNOLOGY PARTNER</span>
+                <h3 class="partner-name">NUCODE (누코드)</h3>
+              </div>
+            </div>
+            <p class="partner-desc">테크포지(TECHFORGE)와 함께 차세대 스마트 엠비언트 제어 시스템과 핵심 솔루션을 공동 협력하는 공식 기술 파트너사입니다. 하드웨어·소프트웨어 기술 협력을 통해 인텔리엠비언트의 높은 완성도와 안정성을 함께 만들어갑니다.</p>
+            <div class="partner-meta">
+              <span>협력 분야</span>
+              <strong>스마트 제어 시스템 및 핵심 기술 공동 협력</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="partner-card">
+          <div class="partner-logo-showcase" style="background-color: #171c26;">
+            <img src="./partner_jlcpcb.png" alt="JLCPCB" />
+          </div>
+          <div class="partner-info-body">
+            <div class="partner-top">
+              <div class="partner-title-box">
+                <span class="partner-role">GLOBAL PCB & SMT MANUFACTURING PARTNER</span>
+                <h3 class="partner-name">JLCPCB</h3>
+              </div>
+            </div>
+            <p class="partner-desc">인텔리엠비언트 전용 고정밀 PCB 기판 제작 및 SMT(표면실장) 공정 협력을 수행하는 글로벌 하드웨어 제조 파트너입니다. 엄격한 회로 정밀도와 자동차 전장용 내구성 기준을 충족하는 컨트롤 보드 생산을 담당합니다.</p>
+            <div class="partner-meta">
+              <span>협력 분야</span>
+              <strong>고정밀 PCB 기판 제조 및 SMT 어셈블리 협력</strong>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. 개발환경 (DEVELOPMENT ENVIRONMENT) ==================== -->
+  <section class="corp-section alt-bg" id="devenv">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">개발환경</h2>
+        <p class="section-sub">Development Environment & Engineering Stack</p>
+      </div>
+
+      <div class="partners-intro">
+        <h3 class="partners-headline">
+          하드웨어 회로 설계부터 임베디드 펌웨어, 앱 소프트웨어까지<br />
+          체계적인 엔지니어링 개발환경을 기반으로 완성됩니다.
+        </h3>
+        <p class="partners-lead-text">
+          테크포지는 정밀한 차량용 전장 제어와 끊김 없는 무선 통신, 직관적인 사용자 인터페이스를 구현하기 위해 검증된 전문 개발 툴체인과 엔지니어링 환경을 구축하고 있습니다.
+        </p>
+      </div>
+
+      <div class="partners-grid" id="devenv-grid">
+        <article class="partner-card">
+          <div class="partner-logo-showcase" style="background-color: #161616;">
+            <span style="font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #a1a1aa; letter-spacing: 0.08em;">ALTIUM DESIGNER</span>
+          </div>
+          <div class="partner-info-body">
+            <div class="partner-top">
+              <div class="partner-title-box">
+                <span class="partner-role">PCB & HARDWARE CIRCUIT DESIGN</span>
+                <h3 class="partner-name">Altium Designer – PCB 회로 설계</h3>
+              </div>
+            </div>
+            <p class="partner-desc">인텔리엠비언트 전용 컨트롤러의 정밀 회로도(Schematic) 작성, 다층(Multi-layer) PCB 아트워크 및 차량 전장용 노이즈·전력 무결성 설계를 Altium Designer 기반으로 수행합니다.</p>
+            <div class="partner-meta">
+              <span>적용 영역</span>
+              <strong>PCB 회로 설계 · 다층 기판 레이아웃 · 전장 하드웨어 검증</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="partner-card">
+          <div class="partner-logo-showcase" style="background-color: #161616;">
+            <span style="font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #a1a1aa; letter-spacing: 0.08em;">SEGGER EMBEDDED STUDIO</span>
+          </div>
+          <div class="partner-info-body">
+            <div class="partner-top">
+              <div class="partner-title-box">
+                <span class="partner-role">EMBEDDED FIRMWARE DEVELOPMENT</span>
+                <h3 class="partner-name">SEGGER Embedded Studio – 임베디드 펌웨어 개발</h3>
+              </div>
+            </div>
+            <p class="partner-desc">SEGGER Embedded Studio 통합 개발 환경과 J-Link 디버깅 툴체인을 활용하여 실시간 조명 제어 알고리즘, 저전력 무선 통신 및 고신뢰성 임베디드 펌웨어를 개발·최적화합니다.</p>
+            <div class="partner-meta">
+              <span>적용 영역</span>
+              <strong>임베디드 펌웨어 개발 · 실시간 광원 제어 · 시스템 디버깅</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="partner-card">
+          <div class="partner-logo-showcase" style="background-color: #161616;">
+            <span style="font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #a1a1aa; letter-spacing: 0.08em;">STM32 / STM32Cube</span>
+          </div>
+          <div class="partner-info-body">
+            <div class="partner-top">
+              <div class="partner-title-box">
+                <span class="partner-role">MCU ARCHITECTURE & PERIPHERAL CONFIG</span>
+                <h3 class="partner-name">STM32 (STMicroelectronics) – MCU 제어 및 하드웨어 플랫폼</h3>
+              </div>
+            </div>
+            <p class="partner-desc">고성능 ARM Cortex-M 기반 STM32 마이크로컨트롤러와 STM32Cube 생태계(CubeMX / HAL)를 활용하여 정밀 타이머(PWM/DMA) 광원 구동 및 차량 통신 페리페럴을 안정적으로 설계합니다.</p>
+            <div class="partner-meta">
+              <span>적용 영역</span>
+              <strong>STM32 MCU 아키텍처 · 고속 DMA/PWM 제어 · 하드웨어 추상화 설계</strong>
+            </div>
+          </div>
+        </article>
+
+        <article class="partner-card">
+          <div class="partner-logo-showcase" style="background-color: #161616;">
+            <span style="font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #a1a1aa; letter-spacing: 0.08em;">GITHUB</span>
+          </div>
+          <div class="partner-info-body">
+            <div class="partner-top">
+              <div class="partner-title-box">
+                <span class="partner-role">VERSION CONTROL & RELEASE MANAGEMENT</span>
+                <h3 class="partner-name">GitHub – 소스코드 형상 관리 및 펌웨어 릴리즈</h3>
+              </div>
+            </div>
+            <p class="partner-desc">임베디드 펌웨어와 하드웨어 리비전, 제어 소프트웨어의 모든 변경 이력을 GitHub 기반으로 체계적으로 관리하며, 코드 리뷰와 버전별 릴리즈 파이프라인을 통해 소프트웨어 품질을 보증합니다.</p>
+            <div class="partner-meta">
+              <span>적용 영역</span>
+              <strong>형상 관리(Git) · 펌웨어 버전 릴리즈 · 협업 및 이슈 트래킹</strong>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 7. 고객지원 (SUPPORT & CONTACT) ==================== -->
+  <section class="corp-section" id="support">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">고객지원</h2>
+        <p class="section-sub">Customer Support & Inquiry</p>
+      </div>
+
+      <div class="support-grid">
+        <!-- Left: FAQ & Warranty Info -->
+        <div class="support-panel">
+          <h3 class="support-panel-title">자주 묻는 질문 및 A/S 안내</h3>
+          <p class="support-panel-sub">인텔리엠비언트 구매 및 장착 관련 안내 사항입니다.</p>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-q">Q. 장착 가능한 차종은 어떻게 확인하나요?</div>
+              <div class="faq-a">국산 및 수입 전 차종 실내 트림 구조에 맞춘 장착을 지원하며, 우측 문의 폼에 차종과 연식을 남겨주시면 상세 안내를 도와드립니다.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">Q. 조명이 꺼져 있을 때 외관상 이질감은 없나요?</div>
+              <div class="faq-a">초슬림 비노출 매립 설계로 시공되어 주간이나 소등 시에도 순정 인테리어 그대로의 깔끔한 외관을 유지합니다.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">Q. 품질 보증 및 사후 관리(A/S)는 어떻게 진행되나요?</div>
+              <div class="faq-a">TECHFORGE 정품 등록 고객을 대상으로 무상 품질 보증 및 신속한 기술 지원을 제공합니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Product / Installation Inquiry Form -->
+        <div class="support-panel">
+          <h3 class="support-panel-title">제품 구매 및 장착·제휴 문의</h3>
+          <p class="support-panel-sub">문의 내용을 남겨주시면 담당자에게 실시간 접수되어 빠르게 연락드리겠습니다.</p>
+
+          <!-- Hidden iframe allows native HTML form POST to succeed from any PC or Mobile local file viewer even when JavaScript or CORS is restricted -->
+          <iframe name="hidden_inquiry_iframe" id="hidden_inquiry_iframe" style="display:none;"></iframe>
+
+          <form class="inquiry-form" id="inquiry-form" action="https://api.web3forms.com/submit" method="POST" target="hidden_inquiry_iframe" accept-charset="UTF-8">
+            <input type="hidden" name="access_key" id="web3-access-key" value="618947b7-85c4-49d9-a09e-f1e9752e9dff" />
+            <input type="hidden" name="subject" value="[TECHFORGE] 홈페이지 고객 문의가 접수되었습니다." />
+            <input type="hidden" name="from_name" value="TECHFORGE" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="inq-name">성함 / 업체명</label>
+                <input type="text" id="inq-name" name="Name" class="form-control" placeholder="홍길동" required />
+              </div>
+              <div class="form-group">
+                <label for="inq-phone">연락처</label>
+                <input type="tel" id="inq-phone" name="Phone" class="form-control" placeholder="010-0000-0000" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="inq-car">차종 및 연식</label>
+                <input type="text" id="inq-car" name="Vehicle_Model_Year" class="form-control" placeholder="예: 그랜저 GN7 / 2025년식" />
+              </div>
+              <div class="form-group">
+                <label for="inq-type">문의 유형</label>
+                <select id="inq-type" name="Inquiry_Type" class="form-control">
+                  <option value="인텔리엠비언트 제품 구매 문의">인텔리엠비언트 제품 구매 문의</option>
+                  <option value="장착 및 시공 예약 문의">장착 및 시공 예약 문의</option>
+                  <option value="B2B 대리점 및 장착점 제휴 문의">B2B 대리점 및 장착점 제휴 문의</option>
+                  <option value="A/S 및 기술 지원">A/S 및 기술 지원</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inq-msg">문의 내용</label>
+              <textarea id="inq-msg" name="Message" class="form-control" placeholder="궁금하신 사항이나 요청 내용을 입력해 주세요." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" id="inq-submit-btn" style="width: 100%; margin-top: 6px;">문의 접수하기</button>
+            <div id="inq-status-msg" style="display: none; margin-top: 10px; padding: 12px 14px; border: 1px solid #3f3f46; background: #161616; font-size: 0.84rem; color: #e4e4e7; line-height: 1.5;"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div><strong>TECHFORGE</strong> | Automotive Ambient Lighting System</div>
+    <div>© TECHFORGE. All rights reserved.</div>
+  </footer>
+
+  <!-- ==================== DATA & NAVIGATION SCRIPT ==================== -->
+  <script>
+    /**
+     * 1. [인텔리엠비언트 단일 제품 데이터]
+     * 이미지 파일 경로(image)와 상세 스펙(specs)을 보내주시면 아래 항목에 바로 적용됩니다.
+     */
+    const PRODUCT_DATA = {
+      model: 'INTELLI-AMBIENT',
+      name: '인텔리 엠비언트<br /><span style="display: inline-block; margin-top: 10px; font-size: 0.92rem; font-weight: 500; line-height: 1.65; color: #d4d4d8;">무배선<br />무빙<br />순정 시스템 연동 지원</span>',
+      summary: '차량 실내 환경과 주행 감성에 맞춰 정교하게 빛을 연출하는 테크포지의 스마트 무빙 엠비언트 라이팅 시스템입니다.',
+      price: '추후 입력',
+      image: '', // 예: './intelli_ambient.jpg'
+      specs: [
+        ['제품명', '인텔리 엠비언트'],
+        ['브랜드', 'TECHFORGE'],
+        ['제어 방식', '순정 네비게이션 제어 + 블루투스 제어'],
+        ['적용 차종', 'Gen5W 이상 (외제차는 추후 공지예정)'],
+        ['구성 품목', '아크릴 6개, 메인모듈 + 서브모듈 4개 (배선포함)']
+      ]
+    };
+
+    /**
+     * 2. [시공갤러리 데이터]
+     * 시공 사진이나 레퍼런스 이미지를 보내주시면 image 경로에 바로 적용됩니다.
+     */
+    const GALLERY_DATA = [
+      {
+        meta: 'REFERENCE 01',
+        title: '인텔리엠비언트 전면 대시보드 & 도어 라인 시공',
+        desc: '끊김 없이 이어지는 수평 라인을 통해 야간 주행 시 넓고 안정감 있는 실내 공간감을 완성합니다.',
+        image: './gallery_ref_01.gif'
+      },
+      {
+        meta: 'REFERENCE 02',
+        title: '인텔리엠비언트 센터콘솔 & 풋등 연동 시공',
+        desc: '상단 메인 라인과 하단 간접 조명의 밝기 밸런스를 정밀하게 맞춘 실내 무드 연출 사례입니다.',
+        image: ''
+      },
+      {
+        meta: 'REFERENCE 03',
+        title: '인텔리엠비언트 주간 소등 상태 (비노출 매립)',
+        desc: '조명 소등 시에도 트림 단차나 돌출 없이 순정 인테리어와 완벽한 일체감을 유지합니다.',
+        image: ''
+      }
+    ];
+
+    /**
+     * 3. [협력사 소개 데이터]
+     * NUCODE(누코드) 및 JLCPCB 협력사 로고 및 소개 적용
+     */
+    const PARTNERS_DATA = [
+      {
+        role: 'OFFICIAL TECHNOLOGY PARTNER',
+        name: 'NUCODE (누코드)',
+        logoText: 'NUCODE',
+        logoImage: './partner_nucode.png',
+        logoBg: '#ffffff',
+        desc: '테크포지(TECHFORGE)와 함께 차세대 스마트 엠비언트 제어 시스템과 핵심 솔루션을 공동 협력하는 공식 기술 파트너사입니다. 하드웨어·소프트웨어 기술 협력을 통해 인텔리엠비언트의 높은 완성도와 안정성을 함께 만들어갑니다.',
+        area: '스마트 제어 시스템 및 핵심 기술 공동 협력'
+      },
+      {
+        role: 'GLOBAL PCB & SMT MANUFACTURING PARTNER',
+        name: 'JLCPCB',
+        logoText: 'JLCPCB',
+        logoImage: './partner_jlcpcb.png',
+        logoBg: '#171c26',
+        desc: '인텔리엠비언트 전용 고정밀 PCB 기판 제작 및 SMT(표면실장) 공정 협력을 수행하는 글로벌 하드웨어 제조 파트너입니다. 엄격한 회로 정밀도와 자동차 전장용 내구성 기준을 충족하는 컨트롤 보드 생산을 담당합니다.',
+        area: '고정밀 PCB 기판 제조 및 SMT 어셈블리 협력'
+      }
+    ];
+
+    /**
+     * 4. [개발환경 소개 데이터]
+     * Altium Designer, SEGGER Embedded Studio, STM32Cube Ecosystem, GitHub 적용
+     */
+    const DEVENV_DATA = [
+      {
+        role: 'PCB & HARDWARE CIRCUIT DESIGN',
+        name: 'Altium Designer – PCB 회로 설계',
+        logoText: 'ALTIUM DESIGNER',
+        logoImage: '',
+        logoBg: '#161616',
+        desc: '인텔리엠비언트 전용 컨트롤러의 정밀 회로도(Schematic) 작성, 다층(Multi-layer) PCB 아트워크 및 차량 전장용 노이즈·전력 무결성 설계를 Altium Designer 기반으로 수행합니다.',
+        area: 'PCB 회로 설계 · 다층 기판 레이아웃 · 전장 하드웨어 검증'
+      },
+      {
+        role: 'EMBEDDED FIRMWARE DEVELOPMENT',
+        name: 'SEGGER Embedded Studio – 임베디드 펌웨어 개발',
+        logoText: 'SEGGER EMBEDDED STUDIO',
+        logoImage: '',
+        logoBg: '#161616',
+        desc: 'SEGGER Embedded Studio 통합 개발 환경과 J-Link 디버깅 툴체인을 활용하여 실시간 조명 제어 알고리즘, 저전력 무선 통신 및 고신뢰성 임베디드 펌웨어를 개발·최적화합니다.',
+        area: '임베디드 펌웨어 개발 · 실시간 광원 제어 · 시스템 디버깅'
+      },
+      {
+        role: 'MCU ARCHITECTURE & PERIPHERAL CONFIG',
+        name: 'STM32 (STMicroelectronics) – MCU 제어 및 하드웨어 플랫폼',
+        logoText: 'STM32 / STM32Cube',
+        logoImage: '',
+        logoBg: '#161616',
+        desc: '고성능 ARM Cortex-M 기반 STM32 마이크로컨트롤러와 STM32Cube 생태계(CubeMX / HAL)를 활용하여 정밀 타이머(PWM/DMA) 광원 구동 및 차량 통신 페리페럴을 안정적으로 설계합니다.',
+        area: 'STM32 MCU 아키텍처 · 고속 DMA/PWM 제어 · 하드웨어 추상화 설계'
+      },
+      {
+        role: 'VERSION CONTROL & RELEASE MANAGEMENT',
+        name: 'GitHub – 소스코드 형상 관리 및 펌웨어 릴리즈',
+        logoText: 'GITHUB',
+        logoImage: '',
+        logoBg: '#161616',
+        desc: '임베디드 펌웨어와 하드웨어 리비전, 제어 소프트웨어의 모든 변경 이력을 GitHub 기반으로 체계적으로 관리하며, 코드 리뷰와 버전별 릴리즈 파이프라인을 통해 소프트웨어 품질을 보증합니다.',
+        area: '형상 관리(Git) · 펌웨어 버전 릴리즈 · 협업 및 이슈 트래킹'
+      }
+    ];
+
+    function renderFlagshipProduct() {
+      const container = document.getElementById('flagship-product');
+
+      const visualHTML = PRODUCT_DATA.image
+        ? `<img src="${PRODUCT_DATA.image}" alt="${PRODUCT_DATA.name}" />`
+        : `
+          <div class="visual-placeholder">
+            <div class="visual-placeholder-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+            <span class="visual-placeholder-text">인텔리엠비언트 제품 이미지</span>
+            <span class="visual-placeholder-sub">이미지를 전달해 주시면 이 영역에 배치됩니다.</span>
+          </div>
+        `;
+
+      const specsHTML = PRODUCT_DATA.specs
+        .map(([label, val]) => `<tr><th>${label}</th><td>${val}</td></tr>`)
+        .join('');
+
+      container.innerHTML = `
+        <div class="flagship-visual">
+          ${visualHTML}
+        </div>
+        <div class="flagship-details">
+          <span class="flagship-model">${PRODUCT_DATA.model}</span>
+          <h3 class="flagship-name">${PRODUCT_DATA.name}</h3>
+          <p class="flagship-summary">${PRODUCT_DATA.summary}</p>
+
+          <table class="spec-table">
+            ${specsHTML}
+          </table>
+
+          <div class="flagship-actions">
+            <div class="price-block">
+              <span class="price-label">판매 가격</span>
+              <span class="price-value">${PRODUCT_DATA.price}</span>
+            </div>
+            <a href="#support" class="btn-primary">제품 문의하기</a>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderGallery() {
+      const grid = document.getElementById('gallery-grid');
+      grid.innerHTML = GALLERY_DATA.map(item => {
+        const thumbHTML = item.image
+          ? `<img src="${item.image}" alt="${item.title}" />`
+          : `
+            <div class="visual-placeholder">
+              <span class="visual-placeholder-text">시공 사진 영역</span>
+              <span class="visual-placeholder-sub">${item.meta}</span>
+            </div>
+          `;
+
+        return `
+          <article class="gallery-item">
+            <div class="gallery-thumb">${thumbHTML}</div>
+            <div class="gallery-info">
+              <div class="gallery-meta">${item.meta}</div>
+              <h3 class="gallery-title">${item.title}</h3>
+              <p class="gallery-desc">${item.desc}</p>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderPartners() {
+      const grid = document.getElementById('partners-grid');
+      grid.innerHTML = PARTNERS_DATA.map(item => {
+        const logoHTML = item.logoImage
+          ? `<img src="${item.logoImage}" alt="${item.name}" />`
+          : `<span>${item.logoText}</span>`;
+
+        return `
+          <article class="partner-card">
+            <div class="partner-logo-showcase" style="background-color: ${item.logoBg || '#ffffff'};">
+              ${logoHTML}
+            </div>
+            <div class="partner-info-body">
+              <div class="partner-top">
+                <div class="partner-title-box">
+                  <span class="partner-role">${item.role}</span>
+                  <h3 class="partner-name">${item.name}</h3>
+                </div>
+              </div>
+              <p class="partner-desc">${item.desc}</p>
+              <div class="partner-meta">
+                <span>협력 분야</span>
+                <strong>${item.area}</strong>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function renderDevEnv() {
+      const grid = document.getElementById('devenv-grid');
+      grid.innerHTML = DEVENV_DATA.map(item => {
+        const logoHTML = item.logoImage
+          ? `<img src="${item.logoImage}" alt="${item.name}" />`
+          : `<span style="font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 600; color: #a1a1aa; letter-spacing: 0.08em;">${item.logoText}</span>`;
+
+        return `
+          <article class="partner-card">
+            <div class="partner-logo-showcase" style="background-color: ${item.logoBg || '#161616'};">
+              ${logoHTML}
+            </div>
+            <div class="partner-info-body">
+              <div class="partner-top">
+                <div class="partner-title-box">
+                  <span class="partner-role">${item.role}</span>
+                  <h3 class="partner-name">${item.name}</h3>
+                </div>
+              </div>
+              <p class="partner-desc">${item.desc}</p>
+              <div class="partner-meta">
+                <span>적용 영역</span>
+                <strong>${item.area}</strong>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // Highlight active menu link while scrolling
+    const sectionIds = ['about', 'tech', 'lineup', 'gallery', 'partners', 'devenv', 'support'];
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY + 200;
+      let currentId = '';
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollPos) {
+          currentId = id;
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+      });
+    });
+
+    renderFlagshipProduct();
+    renderGallery();
+    renderPartners();
+    renderDevEnv();
+
+    // Mobile hamburger menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+
+    if (mobileMenuBtn && mobileDrawer) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileDrawer.classList.toggle('open');
+      });
+
+      mobileDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileDrawer.classList.remove('open');
+        });
+      });
+    }
+
+    // Private Email Inquiry Form Handler (Works across Desktop, Mobile, and Local file:// environments)
+    const inquiryForm = document.getElementById('inquiry-form');
+    const submitBtn = document.getElementById('inq-submit-btn');
+    const statusMsg = document.getElementById('inq-status-msg');
+    const hiddenIframe = document.getElementById('hidden_inquiry_iframe');
+    let formSubmittedFlag = false;
+
+    if (hiddenIframe) {
+      hiddenIframe.addEventListener('load', () => {
+        if (!formSubmittedFlag) return;
+        formSubmittedFlag = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = '문의 접수하기';
+        statusMsg.style.display = 'block';
+        statusMsg.textContent = '✓ 문의가 정상적으로 접수되었습니다. 담당자 확인 후 빠르게 연락드리겠습니다.';
+        inquiryForm.reset();
+      });
+    }
+
+    if (inquiryForm) {
+      inquiryForm.addEventListener('submit', () => {
+        formSubmittedFlag = true;
+        submitBtn.disabled = true;
+        submitBtn.textContent = '문의 전송 중...';
+        statusMsg.style.display = 'none';
+
+        // Safety timer in case mobile browser blocks iframe load event across origins
+        setTimeout(() => {
+          if (!formSubmittedFlag) return;
+          formSubmittedFlag = false;
+          submitBtn.disabled = false;
+          submitBtn.textContent = '문의 접수하기';
+          statusMsg.style.display = 'block';
+          statusMsg.textContent = '✓ 문의가 정상적으로 접수되었습니다. 담당자 확인 후 빠르게 연락드리겠습니다.';
+          inquiryForm.reset();
+        }, 2500);
+      });
+    }
+  </script>
+</body>
+
+</html>
