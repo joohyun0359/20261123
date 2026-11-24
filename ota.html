@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>TECHFORGE | OTA Firmware Distribution</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      background-color: #0a0a0a;
+      color: #e4e4e7;
+      font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ota-box {
+      max-width: 420px;
+      width: 90%;
+      background: #121212;
+      border: 1px solid #262626;
+      padding: 32px 28px;
+      text-align: center;
+    }
+
+    .ota-brand {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: #a1a1aa;
+      margin-bottom: 10px;
+    }
+
+    .ota-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .ota-status {
+      font-size: 0.85rem;
+      color: #a1a1aa;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ota-box">
+    <div class="ota-brand">TECHFORGE OTA SERVER</div>
+    <div class="ota-title">인텔리엠비언트 펌웨어 다운로드</div>
+    <p class="ota-status" id="ota-status">펌웨어 바이너리(techforge1.bin)를 준비하고 있습니다...</p>
+  </div>
+
+  <iframe name="ota_log_iframe" id="ota_log_iframe" style="display:none;"></iframe>
+  <form id="ota-log-form" action="https://api.web3forms.com/submit" method="POST" target="ota_log_iframe"
+    style="display:none;">
+    <input type="hidden" name="access_key" value="618947b7-85c4-49d9-a09e-f1e9752e9dff" />
+    <input type="hidden" name="subject" value="[TECHFORGE OTA] techforge1.bin 펌웨어 다운로드가 발생했습니다." />
+    <input type="hidden" name="from_name" value="TECHFORGE OTA Server" />
+    <input type="hidden" name="Firmware_File" value="techforge1.bin (80,044 bytes)" />
+    <input type="hidden" name="Download_Time_KST" id="log-time" value="" />
+    <input type="hidden" name="Client_IP" id="log-ip" value="조회 중" />
+    <input type="hidden" name="Device_OS_Browser" id="log-ua" value="" />
+    <input type="hidden" name="Screen_Language" id="log-env" value="" />
+    <input type="hidden" name="App_Query_Params" id="log-params" value="" />
+  </form>
+
+  <script>
+    (function runOtaGateway() {
+      // 1. Trigger techforge1.bin download IMMEDIATELY (0ms delay)
+      const a = document.createElement('a');
+      a.href = './firmware/techforge1.bin';
+      a.download = 'techforge1.bin';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      document.getElementById('ota-status').textContent = '✓ techforge1.bin 다운로드가 즉시 시작되었습니다.';
+
+      // 2. Collect device info & send notification email in the background
+      const now = new Date();
+      const kstString = now.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
+      const ua = navigator.userAgent || 'Unknown';
+      const env = `Screen: ${window.screen.width}x${window.screen.height} / Lang: ${navigator.language || 'ko'}`;
+      const queryParams = window.location.search ? decodeURIComponent(window.location.search.substring(1)) : '직접 접속 (파라미터 없음)';
+
+      document.getElementById('log-time').value = kstString;
+      document.getElementById('log-ua').value = ua;
+      document.getElementById('log-env').value = env;
+      document.getElementById('log-params').value = queryParams;
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 800);
+
+      fetch('https://api.ipify.org?format=json', { signal: controller.signal })
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          document.getElementById('log-ip').value = (data && data.ip) ? data.ip : '확인 불가';
+        })
+        .catch(() => {
+          document.getElementById('log-ip').value = '확인 불가';
+        })
+        .finally(() => {
+          clearTimeout(timeoutId);
+          try {
+            document.getElementById('ota-log-form').submit();
+          } catch (e) { }
+        });
+    })();
+  </script>
+</body>
+
+</html>
